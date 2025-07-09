@@ -7,5 +7,7 @@
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
     <include file="db/changelog/changeset-v1.0-create-stores-table.xml"/>
+    <include file="db/changelog/changeset-v2.0-create-accounts-table.xml"/>
+    <include file="db/changelog/changeset-v2.1-insert-accounts-record.xml"/>
 
 </databaseChangeLog>

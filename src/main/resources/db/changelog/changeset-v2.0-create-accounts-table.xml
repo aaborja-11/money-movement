@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+       http://www.liquibase.org/xml/ns/dbchangelog
+       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="v2.0" author="Alfred">
+        <tagDatabase tag="v2.0"/>
+    </changeSet>
+    <changeSet id="v2.0-create-accounts-table" author="Alfred">
+        <sqlFile path="sql/v2.0-create-accounts-table.sql" relativeToChangelogFile="true" />
+        <rollback>
+            <sqlFile path="sql/v2.0-create-accounts-table-rollback.sql" relativeToChangelogFile="true" />
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
