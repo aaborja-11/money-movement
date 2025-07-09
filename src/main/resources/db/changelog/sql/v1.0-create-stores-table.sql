@@ -1,0 +1,8 @@
+CREATE TABLE mm.stores (
+    id UUID PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_by VARCHAR(255) NOT NULL,
+    created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255) NOT NULL,
+    updated_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
