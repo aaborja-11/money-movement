@@ -9,5 +9,7 @@
     <include file="db/changelog/changeset-v1.0-create-business-table.xml"/>
     <include file="db/changelog/changeset-v2.0-create-accounts-table.xml"/>
     <include file="db/changelog/changeset-v2.1-insert-accounts-record.xml"/>
+    <include file="db/changelog/changeset-v3.0-create-items-table.xml"/>
+    <include file="db/changelog/changeset-v4.0-create-inventory-table.xml"/>
 
 </databaseChangeLog>
