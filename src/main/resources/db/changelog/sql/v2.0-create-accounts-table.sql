@@ -5,7 +5,7 @@ CREATE TABLE mm.accounts (
     username VARCHAR(255) NOT NULL UNIQUE,
     password TEXT NOT NULL,
     created_by VARCHAR(255) NOT NULL DEFAULT 'mm',
-    created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(255) NOT NULL DEFAULT 'mm',
-    updated_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
