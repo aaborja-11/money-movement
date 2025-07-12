@@ -2,6 +2,7 @@ package com.aborja.moneymovement.shared.persistence;
 
 import com.aborja.moneymovement.shared.constants.System;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,13 +24,15 @@ public abstract class BaseEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
+    @Builder.Default
     @Column(nullable = false, updatable = false)
-    private String createdBy = com.aborja.moneymovement.shared.constants.System.MONEY_MOVEMENT.getValue();
+    private String createdBy = System.MONEY_MOVEMENT.getValue();
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Instant createdTimestamp;
 
+    @Builder.Default
     @Column(nullable = false)
     private String updatedBy = System.MONEY_MOVEMENT.getValue();
 

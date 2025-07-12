@@ -1,0 +1,31 @@
+package com.aborja.moneymovement.interfaces.web.handler;
+
+import com.aborja.moneymovement.interfaces.web.shared.ErrorDetails;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+@RestControllerAdvice
+public class ValidationExceptionHandler {
+
+    private final static String VALIDATION_ERROR_MESSAGE = "Validation error";
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorDetails> handleValidationErrors(MethodArgumentNotValidException ex) {
+        final var errorDetails = ErrorDetails.builder()
+            .errors(new ArrayList<>())
+            .message(VALIDATION_ERROR_MESSAGE)
+            .build();
+        
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            errorDetails.addError(new ErrorDetails.Error(error.getField(), error.getDefaultMessage()));
+        });
+        
+        return ResponseEntity.badRequest().body(errorDetails);
+    }
+    
+}
