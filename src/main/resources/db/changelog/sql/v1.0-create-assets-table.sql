@@ -1,4 +1,4 @@
-CREATE TABLE mm.business (
+CREATE TABLE mm.assets (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     created_by VARCHAR(255) NOT NULL DEFAULT 'mm',

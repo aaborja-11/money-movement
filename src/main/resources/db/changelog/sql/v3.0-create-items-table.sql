@@ -1,9 +1,9 @@
 CREATE TABLE mm.items (
     id UUID PRIMARY KEY,
-    business_id UUID NOT NULL,
-    CONSTRAINT fk_business
-        FOREIGN KEY (business_id)
-        REFERENCES business(id)
+    assets_id UUID NOT NULL,
+    CONSTRAINT fk_assets
+        FOREIGN KEY (assets_id)
+        REFERENCES assets(id)
         ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL,
     unit_measurement VARCHAR(25) NOT NULL,

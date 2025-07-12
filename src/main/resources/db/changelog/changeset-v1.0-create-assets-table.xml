@@ -8,10 +8,10 @@
     <changeSet id="v1.0" author="Alfred">
         <tagDatabase tag="v1.0"/>
     </changeSet>
-    <changeSet id="v1.0-create-business-table" author="Alfred">
-        <sqlFile path="sql/v1.0-create-business-table.sql" relativeToChangelogFile="true" />
+    <changeSet id="v1.0-create-assets-table" author="Alfred">
+        <sqlFile path="sql/v1.0-create-assets-table.sql" relativeToChangelogFile="true" />
         <rollback>
-            <sqlFile path="sql/v1.0-create-business-table-rollback.sql" relativeToChangelogFile="true" />
+            <sqlFile path="sql/v1.0-create-assets-table-rollback.sql" relativeToChangelogFile="true" />
         </rollback>
     </changeSet>
 </databaseChangeLog>
