@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "assets")
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @SuperBuilder(toBuilder=true)
 public class Asset extends BaseEntity {

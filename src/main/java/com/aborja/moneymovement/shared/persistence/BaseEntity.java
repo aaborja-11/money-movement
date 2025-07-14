@@ -4,6 +4,7 @@ import com.aborja.moneymovement.shared.constants.System;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @SuperBuilder(toBuilder=true)
 @MappedSuperclass
 @Data
+@NoArgsConstructor
 public abstract class BaseEntity {
 
     @Id
