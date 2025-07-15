@@ -3,16 +3,21 @@ package com.aborja.moneymovement.interfaces.web.shared;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiResponse<T> extends ResponseEntity<T> {
+import java.util.List;
 
-    private Metadata metadata;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiResponse<T> extends ResponseEntity<ResponseBody<T>> {
 
     public ApiResponse(T body, HttpStatus status) {
-        super(body, status);
+        super(new ResponseBody<>(body), status);
+    }
+
+    public ApiResponse(Page<T> body, HttpStatus status) {
+        super(new ResponseBody<>(body), status);
     }
 
     public static <S, T> ApiResponse<T> created(T data) {
@@ -20,6 +25,10 @@ public class ApiResponse<T> extends ResponseEntity<T> {
     }
 
     public static <S, T> ApiResponse<T> success(T data) {
+        return new ApiResponse<>(data, HttpStatus.OK);
+    }
+
+    public static <S, T> ApiResponse<T> success(Page<T> data) {
         return new ApiResponse<>(data, HttpStatus.OK);
     }
 
