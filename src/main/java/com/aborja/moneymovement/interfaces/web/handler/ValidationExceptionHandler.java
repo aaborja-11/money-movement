@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.ArrayList;
 
@@ -16,10 +17,7 @@ public class ValidationExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ApiResponse<ErrorDetails> handleValidationErrors(MethodArgumentNotValidException ex) {
-        final var errorDetails = ErrorDetails.builder()
-            .errors(new ArrayList<>())
-            .message(VALIDATION_ERROR_MESSAGE)
-            .build();
+        final var errorDetails = buildDefaultErrorDetails();
         
         ex.getBindingResult().getFieldErrors().forEach(error -> {
             errorDetails.addError(new ErrorDetails.Error(error.getField(), error.getDefaultMessage()));
@@ -27,5 +25,22 @@ public class ValidationExceptionHandler {
         
         return ApiResponse.badRequest(errorDetails);
     }
-    
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ApiResponse<ErrorDetails> handleValidationErrors(MethodArgumentTypeMismatchException ex) {
+        final var errorDetails = buildDefaultErrorDetails();
+
+        errorDetails.getErrors().add(
+            new ErrorDetails.Error(ex.getPropertyName(), ex.getCause().getMessage())
+        );
+
+        return ApiResponse.badRequest(errorDetails);
+    }
+
+    private ErrorDetails buildDefaultErrorDetails() {
+        return ErrorDetails.builder()
+                .errors(new ArrayList<>())
+                .message(VALIDATION_ERROR_MESSAGE)
+                .build();
+    }
 }

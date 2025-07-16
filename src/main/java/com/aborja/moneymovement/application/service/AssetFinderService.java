@@ -4,7 +4,7 @@ import com.aborja.moneymovement.application.dto.AssetDetails;
 import com.aborja.moneymovement.application.exception.ResourceNotFoundException;
 import com.aborja.moneymovement.application.mapper.AssetDetailsMapper;
 import com.aborja.moneymovement.assets.entities.Asset;
-import com.aborja.moneymovement.assets.repositories.AssetRepository;
+import com.aborja.moneymovement.assets.persistence.AssetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +24,7 @@ public class AssetFinderService {
         return AssetDetailsMapper.toAssetDetails(asset);
     }
 
-    public Page<AssetDetails> find(Pageable pageable) {
+    public Page<AssetDetails> findAll(Pageable pageable) {
         final var assets = assetRepository.findAll(pageable);
         return AssetDetailsMapper.toAssetDetails(assets);
     }

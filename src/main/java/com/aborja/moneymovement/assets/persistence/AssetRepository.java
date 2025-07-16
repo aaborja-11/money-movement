@@ -1,4 +1,4 @@
-package com.aborja.moneymovement.assets.repositories;
+package com.aborja.moneymovement.assets.persistence;
 
 import com.aborja.moneymovement.assets.entities.Asset;
 import org.springframework.data.jpa.repository.JpaRepository;

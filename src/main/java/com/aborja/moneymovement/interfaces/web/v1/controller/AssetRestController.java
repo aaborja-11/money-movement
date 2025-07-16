@@ -35,8 +35,8 @@ public class AssetRestController {
     }
 
     @GetMapping("")
-    public ApiResponse<AssetDetails> find(Pageable pageable) {
-        final var assetDetails = assetFinderService.find(pageable);
+    public ApiResponse<AssetDetails> findAll(Pageable pageable) {
+        final var assetDetails = assetFinderService.findAll(pageable);
         return ApiResponse.success(assetDetails);
     }
 
