@@ -3,12 +3,12 @@ package com.aborja.moneymovement.interfaces.web.v1.controller;
 import com.aborja.moneymovement.application.dto.AccountDetails;
 import com.aborja.moneymovement.application.dto.AssetDetails;
 import com.aborja.moneymovement.application.service.AccountFinderService;
+import com.aborja.moneymovement.application.service.AuthenticationService;
 import com.aborja.moneymovement.interfaces.web.shared.ApiResponse;
+import com.aborja.moneymovement.interfaces.web.v1.request.AccountLoginRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -18,10 +18,17 @@ import java.util.UUID;
 public class AccountController {
 
     private final AccountFinderService accountFinderService;
+    private final AuthenticationService authenticationService;
 
     @GetMapping("/{accountId}")
     public ApiResponse<AccountDetails> findById(@PathVariable UUID accountId) {
         final var accountDetails = accountFinderService.findById(accountId);
+        return ApiResponse.success(accountDetails);
+    }
+
+    @PostMapping("/sessions")
+    public ApiResponse<AccountDetails> login(@Valid @RequestBody AccountLoginRequest request) {
+        final var accountDetails = authenticationService.authenticate(request.getUsername(), request.getPassword());
         return ApiResponse.success(accountDetails);
     }
 

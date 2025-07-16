@@ -40,4 +40,8 @@ public class ApiResponse<T> extends ResponseEntity<ResponseBody<T>> {
         return new ApiResponse<>(data, HttpStatus.NOT_FOUND);
     }
 
+    public static <S, T> ApiResponse<T> unauthorized(T data) {
+        return new ApiResponse<>(data, HttpStatus.UNAUTHORIZED);
+    }
+
 }
