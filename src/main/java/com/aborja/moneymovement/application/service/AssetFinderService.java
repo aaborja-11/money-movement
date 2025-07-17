@@ -29,4 +29,12 @@ public class AssetFinderService {
         return AssetDetailsMapper.toAssetDetails(assets);
     }
 
+    public boolean existsOrElseThrow(UUID id) {
+        final var exists = assetRepository.existsById(id);
+        if (!exists) {
+            throw new ResourceNotFoundException(Asset.class, id);
+        }
+        return true;
+    }
+
 }

@@ -16,4 +16,6 @@ public class Asset extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
+    //private
+
 }

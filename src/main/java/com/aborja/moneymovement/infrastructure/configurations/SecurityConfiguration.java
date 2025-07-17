@@ -1,4 +1,4 @@
-package com.aborja.moneymovement.application.configurations;
+package com.aborja.moneymovement.infrastructure.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

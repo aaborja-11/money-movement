@@ -1,12 +1,12 @@
 CREATE TABLE mm.items (
     id UUID PRIMARY KEY,
-    assets_id UUID NOT NULL,
+    asset_id UUID NOT NULL,
     CONSTRAINT fk_assets
-        FOREIGN KEY (assets_id)
+        FOREIGN KEY (asset_id)
         REFERENCES assets(id)
         ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL,
-    unit_measurement VARCHAR(25) NOT NULL,
+    unit_of_measurement VARCHAR(25) NOT NULL,
     cost_price DOUBLE PRECISION NOT NULL DEFAULT 0.0,
     selling_price DOUBLE PRECISION NOT NULL DEFAULT 0.0,
     active BOOLEAN NOT NULL DEFAULT FALSE,

@@ -1,7 +1,6 @@
 package com.aborja.moneymovement.interfaces.web.v1.controller;
 
 import com.aborja.moneymovement.application.dto.AccountDetails;
-import com.aborja.moneymovement.application.dto.AssetDetails;
 import com.aborja.moneymovement.application.service.AccountFinderService;
 import com.aborja.moneymovement.application.service.AuthenticationService;
 import com.aborja.moneymovement.interfaces.web.shared.ApiResponse;
@@ -15,7 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/accounts")
 @RequiredArgsConstructor
-public class AccountController {
+public class AccountRestController {
 
     private final AccountFinderService accountFinderService;
     private final AuthenticationService authenticationService;

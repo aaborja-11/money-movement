@@ -2,7 +2,10 @@ package com.aborja.moneymovement.interfaces.web.handler;
 
 import com.aborja.moneymovement.interfaces.web.shared.ApiResponse;
 import com.aborja.moneymovement.interfaces.web.shared.ErrorDetails;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -33,6 +36,23 @@ public class ValidationExceptionHandler {
         errorDetails.getErrors().add(
             new ErrorDetails.Error(ex.getPropertyName(), ex.getCause().getMessage())
         );
+
+        return ApiResponse.badRequest(errorDetails);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    ApiResponse<ErrorDetails> handleValidationErrors(HttpMessageNotReadableException ex) {
+        final var cause = ex.getCause();
+
+        if (cause instanceof InvalidFormatException exception) {
+            return ApiResponse.badRequest(ErrorDetails.builder()
+                    .message(exception.getOriginalMessage())
+                    .build());
+        }
+
+        final var errorDetails = ErrorDetails.builder()
+                .message(cause.getMessage())
+                .build();
 
         return ApiResponse.badRequest(errorDetails);
     }
