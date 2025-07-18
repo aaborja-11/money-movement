@@ -2,6 +2,7 @@ package com.aborja.moneymovement.application.mapper;
 
 import com.aborja.moneymovement.application.dto.ItemDetails;
 import com.aborja.moneymovement.items.entities.Item;
+import org.springframework.data.domain.Page;
 
 public final class ItemDetailsMapper {
 
@@ -18,6 +19,10 @@ public final class ItemDetailsMapper {
             item.isActive(),
             item.getType()
         );
+    }
+
+    public static Page<ItemDetails> toItemDetails(Page<Item> items) {
+        return items.map(ItemDetailsMapper::toItemDetails);
     }
 
 }

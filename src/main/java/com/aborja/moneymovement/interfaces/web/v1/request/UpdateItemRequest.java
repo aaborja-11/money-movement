@@ -8,27 +8,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
-public class CreateItemRequest {
-
-    @NotBlank(message = "Name is required")
+public class UpdateItemRequest {
     private String name;
-
-    @NotNull(message = "unitOfMeasurement is required")
     private UnitOfMeasurement unitOfMeasurement;
-
-    @NotNull(message = "costPrice is required")
-    @DecimalMin(value = "0.00", message = "costPrice must be greater than or equal 0")
     private BigDecimal costPrice;
-
-    @NotNull(message = "sellingPrice is required")
-    @DecimalMin(value = "0.00", message = "sellingPrice must be greater than or equal 0")
     private BigDecimal sellingPrice;
-
-    private boolean active;
-
-    @NotNull(message = "type is required")
+    private Boolean active;
     private ItemType type;
 }
