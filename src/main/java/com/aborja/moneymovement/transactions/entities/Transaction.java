@@ -2,6 +2,9 @@ package com.aborja.moneymovement.transactions.entities;
 
 import com.aborja.moneymovement.shared.constants.TransactionType;
 import com.aborja.moneymovement.shared.persistence.BaseEntity;
+import com.aborja.moneymovement.transactions.valueobjects.Payment;
+import com.aborja.moneymovement.transactions.valueobjects.SoldQuantity;
+import com.aborja.moneymovement.transactions.valueobjects.TransactionTimestamp;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -23,17 +25,26 @@ public class Transaction extends BaseEntity {
     @Column(nullable = false)
     private UUID itemId;
 
-    @Column(nullable = false)
-    private BigDecimal transactionAmount = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "amount", column = @Column(nullable = false, name = "payment"))
+    })
+    private Payment payment = new Payment(BigDecimal.ZERO);
 
-    @Column(nullable = false)
-    private BigDecimal transactionQuantity = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "count", column = @Column(nullable = false, name = "quantity"))
+    })
+    private SoldQuantity quantity = new SoldQuantity(BigDecimal.ZERO);
 
     @Column(nullable = false, length = 75)
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
-    @Column(nullable = false)
-    private Instant transactionTimestamp;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "dateTime", column = @Column(nullable = false, name = "transaction_timestamp"))
+    })
+    private TransactionTimestamp transactionTimestamp;
 
 }

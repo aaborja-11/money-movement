@@ -1,5 +1,6 @@
 package com.aborja.moneymovement.assets.entities;
 
+import com.aborja.moneymovement.assets.valueobjects.AssetLabel;
 import com.aborja.moneymovement.shared.persistence.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +14,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder=true)
 public class Asset extends BaseEntity {
 
-    @Column(nullable = false)
-    private String name;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "name", column = @Column(nullable = false, name = "name"))
+    })
+    private AssetLabel assetLabel;
 
 }

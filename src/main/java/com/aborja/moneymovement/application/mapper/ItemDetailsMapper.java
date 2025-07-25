@@ -9,14 +9,16 @@ public final class ItemDetailsMapper {
     private ItemDetailsMapper() { }
 
     public static ItemDetails toItemDetails(Item item) {
+        final var itemLabel = item.getItemLabel();
+
         return new ItemDetails(
             item.getId(),
             item.getAssetId(),
-            item.getName(),
+            itemLabel.getName(),
             item.getUnitOfMeasurement(),
-            item.getCostPrice(),
-            item.getSellingPrice(),
-            item.isActive(),
+            item.getCostPrice().getAmount(),
+            item.getSellingPrice().getAmount(),
+            itemLabel.isActive(),
             item.getType()
         );
     }

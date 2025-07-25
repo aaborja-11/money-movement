@@ -1,8 +1,6 @@
-package com.aborja.moneymovement.accounts.vo;
+package com.aborja.moneymovement.accounts.valueobjects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Lob;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -13,10 +11,7 @@ import lombok.ToString;
 @Embeddable
 public class AccountCredentials {
 
-    @Column(nullable = false, unique = true)
     private String username;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
     private String password;
 
 }

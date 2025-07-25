@@ -1,9 +1,9 @@
 package com.aborja.moneymovement.inventory.entities;
 
+import com.aborja.moneymovement.inventory.valueobjects.InventoryStock;
 import com.aborja.moneymovement.shared.persistence.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.aborja.moneymovement.shared.valueobjects.OperatingHours;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -24,16 +24,23 @@ public class Inventory extends BaseEntity {
     @Column(nullable = false)
     private UUID itemId;
 
-    @Column(nullable = false)
-    private BigDecimal openingStock = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "count", column = @Column(nullable = false, name = "opening_stock"))
+    })
+    private InventoryStock openingStock = new InventoryStock(BigDecimal.ZERO);
 
-    @Column(nullable = false)
-    private BigDecimal remainingStock = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "count", column = @Column(nullable = false, name = "remaining_stock"))
+    })
+    private InventoryStock remainingStock = new InventoryStock(BigDecimal.ZERO);
 
-    @Column
-    private Instant openingTimestamp;
-
-    @Column
-    private Instant closingTimestamp;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "openingTimestamp", column = @Column(name = "opening_timestamp")),
+        @AttributeOverride(name = "closingTimestamp", column = @Column(name = "closing_timestamp"))
+    })
+    private OperatingHours operatingHours;
 
 }

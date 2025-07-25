@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, UUID> {
 
-    @Query("SELECT i FROM Item i WHERE i.assetId = :assetId and i.active is true")
+    @Query("SELECT i FROM Item i WHERE i.assetId = :assetId and i.itemLabel.active is true")
     Page<Item> findActiveItemByAssetId(@Param("assetId") UUID assetId, Pageable pageable);
 
 }

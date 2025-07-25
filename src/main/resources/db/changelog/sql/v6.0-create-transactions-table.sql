@@ -5,8 +5,8 @@ CREATE TABLE mm.transactions (
         FOREIGN KEY (item_id)
         REFERENCES items(id)
         ON DELETE CASCADE,
-    transaction_amount DOUBLE PRECISION NOT NULL DEFAULT 0.0,
-    transaction_quantity DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    payment DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    quantity DOUBLE PRECISION NOT NULL DEFAULT 0.0,
     transaction_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     type VARCHAR(75) NOT NULL,
     created_by VARCHAR(255) NOT NULL DEFAULT 'mm',

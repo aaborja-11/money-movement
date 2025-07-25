@@ -1,16 +1,18 @@
 package com.aborja.moneymovement.sales.entities;
 
+import com.aborja.moneymovement.sales.valueobjects.Expense;
+import com.aborja.moneymovement.sales.valueobjects.Income;
+import com.aborja.moneymovement.sales.valueobjects.Loss;
+import com.aborja.moneymovement.sales.valueobjects.Profit;
 import com.aborja.moneymovement.shared.persistence.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.aborja.moneymovement.shared.valueobjects.OperatingHours;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -24,22 +26,35 @@ public class Sales extends BaseEntity {
     @Column(nullable = false)
     private UUID itemId;
 
-    @Column(nullable = false)
-    private BigDecimal income = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "amount", column = @Column(nullable = false, name = "income"))
+    })
+    private Income income = new Income(BigDecimal.ZERO);
 
-    @Column(nullable = false)
-    private BigDecimal profit = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "amount", column = @Column(nullable = false, name = "profit"))
+    })
+    private Profit profit = new Profit(BigDecimal.ZERO);
 
-    @Column(nullable = false)
-    private BigDecimal expense = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "amount", column = @Column(nullable = false, name = "expense"))
+    })
+    private Expense expense = new Expense(BigDecimal.ZERO);
 
-    @Column(nullable = false)
-    private BigDecimal loss = BigDecimal.ZERO;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "amount", column = @Column(nullable = false, name = "loss"))
+    })
+    private Loss loss = new Loss(BigDecimal.ZERO);
 
-    @Column
-    private Instant openingTimestamp;
-
-    @Column
-    private Instant closingTimestamp;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "openingTimestamp", column = @Column(name = "opening_timestamp")),
+        @AttributeOverride(name = "closingTimestamp", column = @Column(name = "closing_timestamp"))
+    })
+    private OperatingHours operatingHours;
 
 }
