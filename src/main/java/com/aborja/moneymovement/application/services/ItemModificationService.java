@@ -1,37 +1,31 @@
-package com.aborja.moneymovement.application.service;
+package com.aborja.moneymovement.application.services;
 
 import com.aborja.moneymovement.application.command.UpdateItemCommand;
 import com.aborja.moneymovement.application.dto.ItemDetails;
-import com.aborja.moneymovement.application.exception.ResourceNotFoundException;
 import com.aborja.moneymovement.application.mapper.ItemDetailsMapper;
+import com.aborja.moneymovement.assets.persistence.services.AssetDataService;
 import com.aborja.moneymovement.items.entities.Item;
-import com.aborja.moneymovement.items.persistence.ItemRepository;
+import com.aborja.moneymovement.items.persistence.services.ItemDataService;
 import com.aborja.moneymovement.items.valueobjects.ItemLabel;
 import com.aborja.moneymovement.items.valueobjects.Price;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class ItemModificationService {
 
-    private final AssetFinderService assetFinderService;
-    private final ItemRepository itemRepository;
+    private final AssetDataService assetDataService;
+    private final ItemDataService itemDataService;
 
     public ItemDetails updateItem(UpdateItemCommand command) {
-        assetFinderService.existsOrElseThrow(command.assetId());
-        final var item = findItemById(command.id());
+        assetDataService.validateExistsOrThrow(command.assetId());
+        final var item = itemDataService.findById(command.id());
         updateItemByCommand(item, command);
-        final var savedItem = itemRepository.save(item);
+        final var savedItem = itemDataService.save(item);
         return ItemDetailsMapper.toItemDetails(savedItem);
-    }
-
-    private Item findItemById(UUID id) {
-        return itemRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(Item.class, id));
     }
 
     private void updateItemByCommand(final Item item, UpdateItemCommand command) {

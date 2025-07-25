@@ -1,9 +1,9 @@
-package com.aborja.moneymovement.application.service;
+package com.aborja.moneymovement.application.services;
 
 import com.aborja.moneymovement.application.dto.AssetDetails;
 import com.aborja.moneymovement.application.mapper.AssetDetailsMapper;
 import com.aborja.moneymovement.assets.entities.Asset;
-import com.aborja.moneymovement.assets.persistence.AssetRepository;
+import com.aborja.moneymovement.assets.persistence.services.AssetDataService;
 import com.aborja.moneymovement.assets.valueobjects.AssetLabel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AssetCreationService {
 
-    private final AssetRepository assetRepository;
+    private final AssetDataService assetDataService;
 
     public AssetDetails createAsset(String name) {
         final var asset = Asset.builder()
             .assetLabel(new AssetLabel(name))
             .build();
-        return AssetDetailsMapper.toAssetDetails(assetRepository.save(asset));
+        return AssetDetailsMapper.toAssetDetails(assetDataService.save(asset));
     }
 }

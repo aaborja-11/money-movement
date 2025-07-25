@@ -1,10 +1,9 @@
-package com.aborja.moneymovement.application.service;
+package com.aborja.moneymovement.application.services;
 
-import com.aborja.moneymovement.application.dto.AssetDetails;
 import com.aborja.moneymovement.application.dto.ItemDetails;
-import com.aborja.moneymovement.application.mapper.AssetDetailsMapper;
 import com.aborja.moneymovement.application.mapper.ItemDetailsMapper;
 import com.aborja.moneymovement.items.persistence.ItemRepository;
+import com.aborja.moneymovement.items.persistence.services.ItemDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,10 +15,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ItemFinderService {
 
-    private final ItemRepository itemRepository;
+    private final ItemDataService itemDataService;
 
     public Page<ItemDetails> findActiveItemByAssetId(UUID id, Pageable pageable) {
-        final var items = itemRepository.findActiveItemByAssetId(id, pageable);
+        final var items = itemDataService.findActiveItemByAssetId(id, pageable);
         return ItemDetailsMapper.toItemDetails(items);
     }
 

@@ -1,8 +1,8 @@
 package com.aborja.moneymovement.interfaces.web.v1.controller;
 
 import com.aborja.moneymovement.application.dto.AccountDetails;
-import com.aborja.moneymovement.application.service.AccountFinderService;
-import com.aborja.moneymovement.application.service.AuthenticationService;
+import com.aborja.moneymovement.application.services.AccountFinderService;
+import com.aborja.moneymovement.application.services.AuthenticationService;
 import com.aborja.moneymovement.interfaces.web.shared.ApiResponse;
 import com.aborja.moneymovement.interfaces.web.v1.request.AccountLoginRequest;
 import jakarta.validation.Valid;

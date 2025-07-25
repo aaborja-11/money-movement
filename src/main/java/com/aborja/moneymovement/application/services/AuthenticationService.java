@@ -1,6 +1,6 @@
-package com.aborja.moneymovement.application.service;
+package com.aborja.moneymovement.application.services;
 
-import com.aborja.moneymovement.accounts.persistence.AccountRepository;
+import com.aborja.moneymovement.accounts.persistence.services.AccountDataService;
 import com.aborja.moneymovement.application.dto.AccountDetails;
 import com.aborja.moneymovement.application.exception.InvalidCredentialsException;
 import com.aborja.moneymovement.application.mapper.AccountDetailsMapper;
@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final AccountRepository accountRepository;
+    private final AccountDataService accountDataService;
     private final PasswordEncoder passwordEncoder;
 
     public AccountDetails authenticate(String username, String password) {
-        final var account = accountRepository.findByUsername(username)
-                .orElseThrow(InvalidCredentialsException::new);
+        final var account = accountDataService.findByUsername(username);
         validatePassword(password, account.getCredentials().getPassword());
         return AccountDetailsMapper.toAccountDetails(account);
     }

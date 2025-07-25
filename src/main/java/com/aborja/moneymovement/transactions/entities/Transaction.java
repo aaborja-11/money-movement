@@ -35,7 +35,7 @@ public class Transaction extends BaseEntity {
     @AttributeOverrides({
         @AttributeOverride(name = "count", column = @Column(nullable = false, name = "quantity"))
     })
-    private SoldQuantity quantity = new SoldQuantity(BigDecimal.ZERO);
+    private SoldQuantity soldQuantity = new SoldQuantity(BigDecimal.ZERO);
 
     @Column(nullable = false, length = 75)
     @Enumerated(EnumType.STRING)

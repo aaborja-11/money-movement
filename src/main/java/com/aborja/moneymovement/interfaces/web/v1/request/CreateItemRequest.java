@@ -1,5 +1,6 @@
 package com.aborja.moneymovement.interfaces.web.v1.request;
 
+import com.aborja.moneymovement.application.command.CreateItemCommand;
 import com.aborja.moneymovement.shared.constants.ItemType;
 import com.aborja.moneymovement.shared.constants.UnitOfMeasurement;
 import jakarta.validation.constraints.DecimalMin;
@@ -31,4 +32,16 @@ public class CreateItemRequest {
 
     @NotNull(message = "type is required")
     private ItemType type;
+
+    public CreateItemCommand toCreateItemCommand(UUID assetId) {
+        return new CreateItemCommand(
+            assetId,
+            name,
+            unitOfMeasurement,
+            costPrice,
+            sellingPrice,
+            active,
+            type
+        );
+    }
 }
