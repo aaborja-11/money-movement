@@ -1,4 +1,6 @@
 package com.aborja.moneymovement.application.dto;
 
-public record AccountDetails(String firstname, String lastname, String username) {
+import java.util.UUID;
+
+public record AccountDetails(UUID id, String firstname, String lastname, String username) {
 }

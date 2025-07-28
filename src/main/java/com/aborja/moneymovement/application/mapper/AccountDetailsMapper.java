@@ -9,6 +9,7 @@ public final class AccountDetailsMapper {
         final var profile = account.getProfile();
         final var credentials = account.getCredentials();
         return new AccountDetails(
+            account.getId(),
             profile.getFirstname(),
             profile.getLastname(),
             credentials.getUsername()
