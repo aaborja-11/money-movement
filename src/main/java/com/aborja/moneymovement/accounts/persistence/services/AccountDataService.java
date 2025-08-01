@@ -2,6 +2,7 @@ package com.aborja.moneymovement.accounts.persistence.services;
 
 import com.aborja.moneymovement.accounts.entities.Account;
 import com.aborja.moneymovement.accounts.persistence.AccountRepository;
+import com.aborja.moneymovement.application.exception.AccountNotFoundException;
 import com.aborja.moneymovement.application.exception.InvalidCredentialsException;
 import com.aborja.moneymovement.application.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,10 @@ public class AccountDataService {
 
     public Account findByUsername(String username) {
         return accountRepository.findByUsername(username)
-                .orElseThrow(InvalidCredentialsException::new);
+                .orElseThrow(() -> new AccountNotFoundException(username));
+    }
+
+    public Account save(Account account) {
+        return accountRepository.save(account);
     }
 }
