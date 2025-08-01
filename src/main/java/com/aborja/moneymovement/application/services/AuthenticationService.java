@@ -29,6 +29,10 @@ public class AuthenticationService {
         }
     }
 
+    public String encodePassword(String rawPassword) {
+        return passwordEncoder.encode(rawPassword);
+    }
+
     public Account findByUsernameElseThrow(String username) {
         try {
             return accountDataService.findByUsername(username);

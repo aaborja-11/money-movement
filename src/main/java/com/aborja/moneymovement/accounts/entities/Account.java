@@ -31,4 +31,23 @@ public class Account extends BaseEntity {
     })
     private AccountCredentials credentials;
 
+    public void updatePersonProfile(String firstname,
+                                    String lastname) {
+        this.profile = new PersonProfile(firstname, lastname);
+    }
+
+    public void updateUsername(String username) {
+        this.credentials = new AccountCredentials(
+            username,
+            this.credentials.getPassword()
+        );
+    }
+
+    public void updatePassword(String password) {
+        this.credentials = new AccountCredentials(
+            this.credentials.getUsername(),
+            password
+        );
+    }
+
 }
