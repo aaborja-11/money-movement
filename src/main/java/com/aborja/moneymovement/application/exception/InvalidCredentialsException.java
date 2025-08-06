@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidCredentialsException extends RuntimeException {
 
     public InvalidCredentialsException() {
-        super("Invalid username or password");
-        log.error("message={}", "Invalid username or password");
+        super("Invalid credentials");
+        log.error("message={}", "Invalid credentials");
     }
 
 }

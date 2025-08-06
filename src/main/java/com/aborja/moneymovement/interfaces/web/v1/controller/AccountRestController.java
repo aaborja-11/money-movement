@@ -31,7 +31,7 @@ public class AccountRestController {
 
     @PutMapping("/{accountId}")
     public ApiResponse<AccountDetails> updateAccount(@PathVariable UUID accountId,
-                                                     @RequestBody UpdateAccountRequest request) {
+                                                     @Valid @RequestBody UpdateAccountRequest request) {
         final var command = request.toUpdateAccountCommand(accountId);
         final var accountDetails = accountModificationService.updateAccount(command);
         return ApiResponse.success(accountDetails);
